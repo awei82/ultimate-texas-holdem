@@ -1,0 +1,10 @@
+name: ultimate_texas_holdem
+version: 0.1.0
+
+targets:
+  ultimate_texas_holdem:
+    main: src/ultimate_texas_holdem.cr
+
+crystal: 1.6.2
+
+license: MIT
