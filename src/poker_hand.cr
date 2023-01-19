@@ -29,8 +29,33 @@ class PokerHand
     HAND_RANKINGS[@ranking]
   end
 
+  def ranking_pretty
+    case @ranking
+    when "Royal flush"
+      "#{@ranking}! 💰💰💰"
+    when "Straight flush", "Straight"
+      if @cards.first.rank == 'A' && @cards[1].rank == '5'
+        "#{@ranking}, A through 5"
+      else
+        "#{@ranking}, #{@cards.last.rank} through #{@cards.first.rank}"
+      end
+    when "Four of a kind", "Three of a kind"
+      "#{@ranking}, #{Card.value_to_rank(pair_value)}'s"
+    when "Full house"
+      "#{@ranking}, #{Card.value_to_rank(pair_value)}'s over #{Card.value_to_rank(second_pair_value)}'s"
+    when "Flush"
+      "#{@ranking}, #{@cards.first.rank} high"
+    when "Two pair"
+      "#{@ranking}, #{Card.value_to_rank(pair_value)}'s and #{Card.value_to_rank(second_pair_value)}'s"
+    when "Pair"
+      "#{@ranking} of #{Card.value_to_rank(pair_value)}'s"
+    when "High card"
+      "#{@ranking}, #{@cards.first.rank}"
+    end
+  end
+
   def to_s(io : IO)
-    io << "#{@cards.map(&.to_s).join("  , ")}\tranking: #{@ranking}"
+    io << "#{@cards.map(&.to_s).join("  , ")}\tranking: #{ranking_pretty}"
   end
 
   # used for tiebreaks for pairs + higher

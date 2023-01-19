@@ -1,4 +1,24 @@
 struct Card
+  RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A']
+  SUITS = {'S'=>"\033[92m ♠️\033[00m", 'H'=>"\033[91m ♥️\033[00m",'C'=> "\033[92m ♣️\033[00m", 'D'=>"\033[91m ♦️\033[00m"}
+  
+  def self.value_to_rank(v)
+    case v
+    when 12
+      'A'
+    when 11
+      'K'
+    when 10
+      'Q'
+    when 9
+      'J'
+    when 8
+      'T'
+    else
+      (v+2).to_s[0]
+    end
+  end
+
   include Comparable(Card)
 
   property rank       : Char
@@ -45,5 +65,3 @@ struct Card
   end
 end
 
-RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A']
-SUITS = {'S'=>"♠️", 'H'=>"❤️️",'C'=> "♣️", 'D'=>"♦️"}
