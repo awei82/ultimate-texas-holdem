@@ -6,8 +6,8 @@ class Deck
 
   def initialize
     @cards = [] of Card
-    ['S','H','D','C'].each do |suit|
-      ['2','3','4','5','6','7','8','9','T','J','Q','K','A'].each do |rank|
+    Card::SUITS.keys.each do |suit|
+      Card::RANKS.each do |rank|
         @cards << Card.new("#{rank}#{suit}")
       end
     end
